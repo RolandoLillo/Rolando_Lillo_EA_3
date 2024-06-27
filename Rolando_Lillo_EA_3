@@ -1,0 +1,81 @@
+def mostrar_escenario(escenario):
+    print("\t\t\t ESCENARIO\n")
+    for numero in range(0, 50, 10):
+        fila = ""
+        for columna in range(10):
+            fila += f"{escenario[numero + columna]}\t"
+        print(fila)
+    print("\n")
+
+
+compras_rut = []
+
+def comprar_entradas(escenario):
+    precios = {1: 100000, 2: 100000, 3: 100000, 4: 100000, 5: 100000,
+               6: 100000, 7: 100000, 8: 100000, 9: 100000, 10: 100000,
+               11: 100000, 12: 100000, 13: 100000, 14: 100000, 15: 100000,
+               16: 100000, 17: 100000, 18: 100000, 19: 100000, 20: 100000,
+               21: 50000, 22: 50000, 23: 50000, 24: 50000, 25: 50000,
+               26: 50000, 27: 50000, 28: 50000, 29: 50000, 30: 50000,
+               31: 10000, 32: 10000, 33: 10000, 34: 10000, 35: 10000,
+               36: 10000, 37: 10000, 38: 10000, 39: 10000, 40: 10000,
+               41: 10000, 42: 10000, 43: 10000, 44: 10000, 45: 10000,
+               46: 10000, 47: 10000, 48: 10000, 49: 10000, 50: 10000}
+
+    cantidad = int(input("Ingrese la cantidad de entradas a comprar (1 o 2): "))
+    if cantidad < 1 or cantidad > 2:
+        print("Cantidad inválida.")
+        return
+
+    for _ in range(cantidad):
+        mostrar_escenario(escenario)
+        asiento = int(input("Seleccione el número del asiento que desea comprar: "))
+        while asiento < 1 or asiento > 50 or escenario[asiento - 1] == 'X':
+            asiento = int(input("Error de compra de entrada invalida, debe estar disponible y entre 1 a 50: "))
+        escenario[asiento - 1] = 'X'
+        precio = precios[asiento]
+        run = int(input("Ingrese el RUN de la persona que ocupará el asiento (sin guión ni puntos): "))
+        if run <= 0:
+            print("El run ingresado es incorrecto, por favor ingrese un run valido")
+            run = int(input("Ingrese el RUN de la persona que ocupará el asiento (sin guión ni puntos): "))
+
+        print(f"Se ha comprado el asiento {asiento} por ${precio} para el RUN {run}.\n")
+        compras_rut.append(run)
+
+
+escenario = []
+for contador in range(1, 51):
+    escenario.append(str(contador))
+
+def salir():
+    print("Usted ha elegido la opcion salir")
+    print("¡Gracias por utilizar el sistema de ventas!")
+    print("Nombre: Rolando Lillo Martinez")
+
+    while True:
+        print("\t\t\t\tCOMPRA DE ENTRADAS PARA EL CONCIERTO DE MICHAEL JACKSON")
+        print("1. Comprar entradas")
+        print("2. Mostrar ubicaciones disponibles")
+        print("3. Rut que compraron entradas")
+        print("4. Ganancias totales de las entradas compradas")
+        print("5. Salir")
+        
+        opcion = int(input("Seleccione una opción: "))
+        match opcion:
+                case 1:
+                    
+                    comprar_entradas(escenario)
+                case 2:
+                    
+                    mostrar_escenario(escenario)
+                case 3: 
+                    print(f'Los rut que han comprado entradas son {compras_rut}')
+                    #print(max(lista_run))
+                case 4:
+                    print("")
+                
+                case 5:
+                    salir()
+                    break
+                case _:
+                    print("Opción inválida. Por favor, seleccione nuevamente.\n")
